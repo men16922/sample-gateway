@@ -1,11 +1,15 @@
 package kr.co.danal.gw.config;
 
 import kr.co.danal.gw.config.properties.RoutingProperties;
+import kr.co.danal.gw.dto.AuthDto;
+import kr.co.danal.gw.dto.ipn.PDto;
 import kr.co.danal.gw.filter.AuthorizationFilterFactory;
 import kr.co.danal.gw.filter.global.GlobalFilter;
 import static kr.co.danal.gw.util.FunctionUtil.returnCodeMappingFunction;
 import static kr.co.danal.gw.util.FunctionUtil.authMappingFunction;
 import static kr.co.danal.gw.util.FunctionUtil.maptoStringFunction;
+
+import kr.co.danal.gw.util.FilterUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
@@ -35,13 +39,13 @@ public class RouteConfig {
                     .filters(gatewayFilterSpec -> gatewayFilterSpec
                             // Request
                             .filter(globalFilter.apply(globalFilter.newConfig()))
-                            .filter(authorizationFilterFactory.apply(authorizationFilterFactory.newConfig()))
-                            .modifyRequestBody(Map.class, Map.class, authMappingFunction()) // auth 매핑
-                            .modifyRequestBody(Map.class, String.class, MediaType.APPLICATION_FORM_URLENCODED_VALUE, maptoStringFunction()) // map -> String
+                            .filter(authorizationFilterFactory.apply(authorizationFilterFactory.newConfig())) // header 체크
+                            .modifyRequestBody(AuthDto.class, PDto.class, authMappingFunction()) // auth 매핑
+                            .modifyRequestBody(PDto.class, String.class, MediaType.APPLICATION_FORM_URLENCODED_VALUE, maptoStringFunction()) // map -> String
 
                             // Response
                             .modifyResponseBody(String.class, Map.class, returnCodeMappingFunction()) // returnCode 매핑
-                            .setResponseHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                            .setResponseHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE) // header 선언
                             )
                     .uri(routingProperties.getIpn().getUri()))
                 .build();
