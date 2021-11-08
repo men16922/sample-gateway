@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG" packages="kr.co.danal">
+	<Properties>
+		<Property name="logFileName">gateway</Property>
+		<Property name="logPath">/</Property>
+	</Properties>
+	<Appenders>
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+			<PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t|%c{2}] %msg%n"/>
+		</Console>
+		<RollingFile name="DAILYFILE" fileName="${logPath}/${logFileName}.log" filePattern="${logPath}/${logFileName}-%d{yyyyMMdd}.log">
+			<PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t|%c{2}] %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</RollingFile>
+	</Appenders>
+
+	<Loggers>
+		<Root level="debug">
+			<AppenderRef ref="CONSOLE"/>
+		</Root>
+		<logger name="SYSTEM.OUT" level="info" additivity="true">
+			<AppenderRef ref="DAILYFILE"/>
+		</logger>
+		<logger name="SYSTEM.ERR" level="info" additivity="true">
+			<AppenderRef ref="DAILYFILE"/>
+		</logger>
+		<logger name="kr.co.danal" level="debug" additivity="true">
+			<AppenderRef ref="DAILYFILE"/>
+		</logger>
+		<logger name="org.springframework" level="debug" additivity="true">
+			<AppenderRef ref="DAILYFILE"/>
+		</logger>
+		<logger name="org.apache" level="info" additivity="false">
+			<AppenderRef ref="DAILYFILE"/>
+		</logger>
+		<logger name="org.springframework.web.reactive.function.client" level="trace" additivity="true">
+			<AppenderRef ref="CONSOLE"/>
+		</logger>
+		<logger name="org.hibernate.SQL" level="trace" additivity="true">
+			<AppenderRef ref="CONSOLE"/>
+		</logger>
+		<logger name="org.hibernate.type" level="trace" additivity="true">
+			<AppenderRef ref="CONSOLE"/>
+		</logger>
+
+
+
+
+	</Loggers>
+</Configuration>

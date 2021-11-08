@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: DanalPay API Gateway
+    admin:
+      enabled: true # spring boot admin 기능 활성화
+#  boot:
+#    admin:
+#      client:
+#        url: http://localhost:48080 # Admin Server의 URI
+#        username: ${security.admin.username} # Admin Server의 spring.security.user.name 값과 동일하게 설정
+#        password: ${security.admin.password} # Admin Server의 spring.security.user.password 값과 동일하게 설정
+#        instance:
+#          name: ${spring.application.name} # Admin Server에서 본 프로젝트를 명명할 이름
+#          service-url: https://local.danalpay.com:${server.port} # (임시) Admin Server에 등록할 service-base-url
+##          service-url: http://localhost:${server.port} # (임시) Admin Server에 등록할 service-base-url
+
+security:
+  admin:
+    username: danal
+    password: obp1!

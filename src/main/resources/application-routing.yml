@@ -1,0 +1,6 @@
+routing:
+  ipn:
+    id: first-service
+    uri: http://localhost:8081
+    path: /first-service/ipn
+    method: POST

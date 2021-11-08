@@ -1,0 +1,20 @@
+server:
+  port: 8443
+  server-header: server # Http Header server info
+  servlet:
+    jsp:
+      init-parameters:
+        listings: false # directory listing disable
+    session:
+      timeout: 20m # Session Timeout
+    encoding:
+      charset: UTF-8
+      force: true
+  error:
+    whitelabel:
+      enabled: false
+  shutdown: graceful
+
+spring:
+  application:
+    name: apigateway-service

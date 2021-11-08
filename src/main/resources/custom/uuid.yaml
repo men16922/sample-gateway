@@ -1,0 +1,14 @@
+#############################
+## UUID Generation rule    ##
+#############################
+
+# TID field order:  TIME+Sequence+MachineID+ServiceID+CustomValue
+# TID generic rule: TIME(17)+Sequence(3)+MachineID(1)+ServiceID(2)+CustomValue(1) = 24
+
+## y: year, M: month, d: day, H: hour, m: minute, s:second, S:milisecond
+TIME_FORMAT: yyyyMMddHHmmssSSS
+SEQUENCE_SIZE: 000
+SERVICE_ID: 56
+CUSTOM_VALUE: 0
+
+MACHINE_ID: 1
