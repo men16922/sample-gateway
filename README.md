@@ -1,1 +1,1 @@
-# spring cloud gatewa sample
+# spring cloud gateway sample
